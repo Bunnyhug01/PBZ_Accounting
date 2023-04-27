@@ -1,0 +1,37 @@
+﻿{% extends 'main/base.html' %}
+
+{% block title %}
+{{ name }}
+<form method="post">
+    {% csrf_token %}        
+    <div class="row">
+        <div class="col">
+            {{ context.form.code }}<br>
+        </div>
+        <div class="col">
+            {{ context.form.name }}<br>
+        </div>
+        <div class="col">
+            {{ context.form.category }}<br>
+        </div>
+    </div>
+    <button type="submit" name="submitEdit" class="btn btn-success">Edit</button>
+    <span>{{ context.error }}</span>
+</form>
+{% endblock %}
+
+{% block headers %}
+    <th scope="col">Code</th>
+    <th scope="col">Name</th>
+    <th scope="col">Category</th>
+{% endblock %}
+
+{% block grid %}
+    
+<tr>
+    <td>{{ record.code }}</td>
+    <td>{{ record.name }}</td>
+    <td>{{ record.category }}</td>
+</tr>
+
+{% endblock %}

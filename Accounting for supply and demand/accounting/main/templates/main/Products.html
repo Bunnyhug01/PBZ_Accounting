@@ -1,0 +1,45 @@
+﻿{% extends 'main/base.html' %}
+
+{% block title %}
+{{ name }}
+<h6>Add Product</h6>
+<form method="post">
+    {% csrf_token %}        
+    <div class="row">
+        <div class="col">
+            {{ context.form.code }}<br>
+        </div>
+        <div class="col">
+            {{ context.form.name }}<br>
+        </div>
+        <div class="col">
+            {{ context.form.category }}<br>
+        </div>
+    </div>
+    <button type="submit" name="submitProd" class="btn btn-success">Add</button>
+    <span>{{ context.error }}</span>
+</form>
+{% endblock %}
+
+{% block headers %}
+    <th scope="col">Code</th>
+    <th scope="col">Name</th>
+    <th scope="col">Category</th>
+{% endblock %}
+
+{% block grid %}
+    {% for el in products %}
+    <tr>
+        <td>{{ el.code }}</td>
+        <td>{{ el.name }}</td>
+        <td>{{ el.category }}</td>
+        <td align="right">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="Edit" value="{{ el.code }}" class="btn btn-primary">Edit</button>
+                <button type="submit" name="Delete" value="{{ el.code }}" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+{% endblock %}
